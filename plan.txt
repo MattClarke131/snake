@@ -1,0 +1,64 @@
+Snake Plan
+
+GOALS:
+  1. Minimize the controller
+  2. Use canvas
+  3.A. View updates from model
+    3A1 View deals with frames, not the model.
+  3.B. View updates from controller
+  4. Test-driven development
+    4.1. Write tests before writing function body.
+    4.2. Have every line accounted for.
+  5. Model first, then view, then controller.
+  6. Two-player potential
+  7. Rewind
+  8. Use class specialization with model entities.
+Rules of Snake:
+  1. 5 controls: up, down, left right, pause
+    1.1. instant feedback of control button.
+  2. Snake cannot hit walls
+  3. Snake cannot hit self.
+  4. "board" is a grid of pixels
+  5. Apples appear randomly after last apple is eaten.
+  6. Eating apples increases score.
+  7. Eating apples increases snake length.
+  8. Start in the center.
+  9. Snake never stops moving.
+  Optional: As time passes, increase difficulty with speed.
+Features:
+  1. Score display
+  2.
+Data structures:
+  1. Snake is an object
+    1.1. snake.body = [[headx,heady],[x1,y1],[x2,y2]]
+    1.2. snake.remainingGrowth = number [-n,m];
+    1.3. snake.color = string
+    1.4. snake.direction = string ["left", "down", "up", "right"]
+  2. Fruits are objects
+    2.1. fruit.coordinates = [xcoord, ycoord]
+    2.2. fruit.growthValue = number: [-n, m]
+    2.3. fruit.color = string: "red", "blue", etc.
+    2.4. fruit.pointValue = number: [-n, m]
+    2.5. fruit.lifeSpan = number
+  3. Fruit array
+    3.0. [fruit,fruit,fruit,...]
+  4. Frame object
+    4.0. Contains snake, fruit array
+  5. Model (game rules)
+    5.1. Store constants as properties
+      4.1.1. Height
+      4.1.2. Width
+      4.1.3. Initial position
+    5.2. Handle frame transitions
+      5.2.1. frame transitions are functions that input frames, and output frames.
+Design question!
+  How do we divide model responsibilites?
+  A: Large model, small objects (puppetmaster, puppets) *** WINNER ***
+  B: Large objects, small model (actors on a stage)
+
+  Answer: A
+    small objects, small frame, large model
+Controller:
+  1. Has timer
+View:
+  render.js
