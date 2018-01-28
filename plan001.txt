@@ -1,0 +1,66 @@
+Data structures:
+  1. Snake is an object
+    1.1. snake.body = [[headx,heady],[x1,y1],[x2,y2]]
+    1.2. snake.remainingGrowth = number [-n,m];
+    1.3. snake.color = string
+    1.4. snake.direction = string ["left", "down", "up", "right"]
+  2. Fruits are objects
+    2.1. fruit.coordinates = [xcoord, ycoord]
+    2.2. fruit.growthValue = number: [-n, m]
+    2.3. fruit.color = string: "red", "blue", etc.
+    2.4. fruit.pointValue = number: [-n, m]
+    2.5. fruit.lifeSpan = number
+  3. Fruit array
+    3.0. [fruit,fruit,fruit,...]
+  4. Frame object
+    4.0. Contains snake, fruit array
+  5. Model (game rules)
+    5.1. Store constants as properties
+      4.1.1. Height
+      4.1.2. Width
+      4.1.3. Initial position
+    5.2. Handle frame transitions
+      5.2.1. frame transitions are functions that input frames, and output frames.
+
+GameEntity object
+  + Properties:
+    + color
+      color = hexadecimal number
+    + Array of coordinate pairs position
+      "coord = {xcoord =x, ycoord=y}"
+  + Snake subclass
+    + position array
+    + direction
+    + optional methods
+      + generate snake for next frame
+    + remainingGrowth
+  + Fruit subclass
+    + point value
+    + remaining life span
+    + bonus effect?
+    + optional methods
+      + generate next fruit frame?
+
+Frame object
+  + properties
+    + number in sequence
+    + height
+    + width
+    + fruit array
+    + snake object
+
+Next Frame function
+  frame, action --> frame
+  subfunctions:
+    + next snake
+    + detect collisions
+      + snake wall
+      + snake snake
+      + snake fruit
+    + next fruit state
+
+Tests
+  + is frame legal?
+
+
+http://www.htdp.org/2003-09-26/Book/curriculum-Z-H-9.html#node_sec_6.4
