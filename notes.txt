@@ -1,0 +1,7 @@
+Snake Notes
+// testing
+Q: How can I pass a variable number of arguments into a function
+A: Using ES6, you can use array spread
+   myFunction(...myArray)
+   Before ES6, you had to use .apply
+   myFunction.apply(null, myArray);
