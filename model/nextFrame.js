@@ -69,6 +69,23 @@ const testWallCollision01 = new ModelTest('_wallCollision test 01',
   _wallCollision);
 modelTestArr.push(testWallCollision00, testWallCollision01);
 
+//Contract _fruitCollision: snake, fruit -> boolean
+function _fruitCollision(snake, fruit) {
+  let head = snake.positionArray[0];
+  let fruitCoords = fruit.positionArray;
+  return _isInCoordArray(head, fruitCoords);
+}
+// Tests
+const testFruitCollision00 = new ModelTest('_fruitCollision test 00',
+  [new Snake([[3,3],[4,3],[5,3]], 'left', 0), new Fruit([[3,3]], 1, 100),],
+  true,
+  _fruitCollision);
+const testFruitCollision01 = new ModelTest('_fruitCollision test 01',
+    [new Snake([[3,3],[4,3],[5,3]], 'left', 0), new Fruit([[4,4]], 1, 100),],
+  false,
+  _fruitCollision);
+modelTestArr.push(testFruitCollision00, testFruitCollision01);
+
 // Contract: nextSnake: snake, newDir, addGrowth -> snake
 // Purpose: To generate the next snake given an old snake, a new direction,
 // and a new amount to grow.
