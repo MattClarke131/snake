@@ -106,6 +106,41 @@ const testNewSnakePos06 = new ModelTest('newSnakePos test 06',
 modelTestArr.push(testNewSnakePos00, testNewSnakePos01, testNewSnakePos02,
   testNewSnakePos03, testNewSnakePos04, testNewSnakePos05, testNewSnakePos06);
 
+// Contract: ageFruitArray: fruitArray -> fruitArray
+// Purpose: Create next fruitArray from existing fruitArray
+// Definition:
+function ageFruitArray(fruitArray) {
+  let newFruitArray = [];
+  for(let i=0; i<fruitArray.length; i++) {
+    let oldFruit = fruitArray[i];
+    let newLifeSpan = oldFruit.remainingLifeSpan - 1;
+    let pointValue = oldFruit.pointValue;
+    let posArr = oldFruit.positionArray;
+    if(newLifeSpan != 0) {
+      newFruitArray.push(new Fruit(posArr,pointValue,newLifeSpan));
+    }
+  }
+  return newFruitArray;
+}
+// Tests:
+const testAgeFruitArray00 = new ModelTest('ageFruitArray test 00',
+  [[new Fruit([[1,1]], 1, 20)]],
+  [new Fruit([[1,1]], 1, 19)],
+  ageFruitArray);
+const testAgeFruitArray01 = new ModelTest('ageFruitArray test 01',
+  [[new Fruit([[1,1]], 1, 20), new Fruit([[2,2]], 2, 10)]],
+  [new Fruit([[1,1]], 1, 19), new Fruit([[2,2]], 2, 9)],
+  ageFruitArray);
+const testAgeFruitArray02 = new ModelTest('ageFruitArray test 02',
+  [[new Fruit([[1,1]], 1, 1)]],
+  [],
+  ageFruitArray);
+const testAgeFruitArray03 = new ModelTest('ageFruitArray test 03',
+  [[new Fruit([[1,1]], 1, 1), new Fruit([[3,3]], 2, 5)]],
+  [new Fruit([[3,3]], 2, 4)],
+  ageFruitArray);
+modelTestArr.push(testAgeFruitArray00, testAgeFruitArray01,
+  testAgeFruitArray02, testAgeFruitArray03);
 
 // Contract: newFruit: fullArray, height, width, pointValue, newLifeSpan -> fruit
 // Purpose: To generate a new fruit on an empty board. New fruits will be on
