@@ -76,28 +76,32 @@ function newSnakePos(posArr, direction, grow) {
 }
 // Tests:
 const testNewSnakePos00 = new ModelTest('newSnakePos test 00',
-  [[[4,4],[4,3],[4,2]], 'down', 0],
-  [[4,5],[4,4],[4,3]],
+  [[[4,4], [4,3], [4,2]], 'down', 0],
+  [[4,5], [4,4], [4,3]],
   newSnakePos);
 const testNewSnakePos01 = new ModelTest('newSnakePos test 01',
-  [[[4,2],[4,3],[4,4]], 'up', 0],
-  [[4,1],[4,2],[4,3]],
+  [[[4,2], [4,3], [4,4]], 'up', 0],
+  [[4,1], [4,2], [4,3]],
   newSnakePos);
 const testNewSnakePos02 = new ModelTest('newSnakePos test 02',
-  [[[4,4],[4,3],[4,2]], 'left', 0],
-  [[3,4],[4,4],[4,3]],
+  [[[4,4], [4,3], [4,2]], 'left', 0],
+  [[3,4], [4,4], [4,3]],
   newSnakePos);
 const testNewSnakePos03 = new ModelTest('newSnakePos test 03',
-  [[[4,4],[4,3],[4,2]], 'right', 0],
-  [[5,4],[4,4],[4,3]],
+  [[[4,4], [4,3], [4,2]], 'right', 0],
+  [[5,4], [4,4], [4,3]],
   newSnakePos);
 const testNewSnakePos04 = new ModelTest('newSnakePos test 04',
-  [[[4,4],[4,3],[4,2]], 'up', 0],
-  [[4,5],[4,4],[4,3]],
+  [[[4,4], [4,3], [4,2]], 'up', 0],
+  [[4,5], [4,4], [4,3]],
   newSnakePos);
 const testNewSnakePos05 = new ModelTest('newSnakePos test 05',
-  [[[4,4],[4,3],[4,2]], 'left', 1],
-  [[3,4],[4,4],[4,3],[4,2]],
+  [[[4,4], [4,3], [4,2]], 'left', 1],
+  [[3,4], [4,4], [4,3], [4,2]],
+  newSnakePos);
+const testNewSnakePos06 = new ModelTest('newSnakePos test 06',
+  [[[3,3], [3,4], [2,4], [2,3], [2,2]], 'left', 0],
+  [[2,3], [3,3], [3,4], [2,4], [2,3]],
   newSnakePos);
 modelTestArr.push(testNewSnakePos00, testNewSnakePos01, testNewSnakePos02,
-  testNewSnakePos03, testNewSnakePos04, testNewSnakePos05);
+  testNewSnakePos03, testNewSnakePos04, testNewSnakePos05, testNewSnakePos06);
