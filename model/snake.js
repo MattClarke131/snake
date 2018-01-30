@@ -4,7 +4,7 @@
 class Snake extends GameEntity {
   constructor(positionArray, direction, remainingGrowth) {
     super(positionArray);
-    if(['left','down','right,','up'].indexOf(direction) == -1) {
+    if(['left','down','right','up'].indexOf(direction) == -1) {
       throw new Error('invalid direction');
     } else if (typeof remainingGrowth != 'number') {
       throw new Error('remainingGrowth must be a number');

@@ -59,8 +59,18 @@ Next Frame function
       + snake fruit
     + next fruit state
 
-Tests
-  + is frame legal?
-
+Next frame
+  + move snakes
+  + test collisions
+    + snake self
+    + snake other snake
+    + snake wall
+    + snake fruit
+  + remove snake(s)?
+  + update score
+  + update snake growth
+  + gameOver?
+  + age fruits
+  + add fruits if necessary
 
 http://www.htdp.org/2003-09-26/Book/curriculum-Z-H-9.html#node_sec_6.4
