@@ -17,11 +17,16 @@ class ModelTest {
   get Name() {
     return this._name;
   }
-  runTest() {
+  runTestVerbose() {
     if(JSON.stringify(this._testFunction(...this._testInputs)) != JSON.stringify(this._testOutput)) {
       throw new Error(this._name + " failed");
     } else {
       console.log(this._name + " succeeded");
+    }
+  }
+  runTest() {
+    if(JSON.stringify(this._testFunction(...this._testInputs)) != JSON.stringify(this._testOutput)) {
+      throw new Error(this._name + " failed");
     }
   }
 }
@@ -31,4 +36,11 @@ function runAllModelTests() {
   for(let i=0; i<modelTestArr.length; i++) {
     modelTestArr[i].runTest();
   }
+  console.log('All test passed')
+}
+function runAllModelTestsVerbose() {
+  for(let i=0; i<modelTestArr.length; i++) {
+    modelTestArr[i].runTestVerbose();
+  }
+  console.log('All test passed')
 }
