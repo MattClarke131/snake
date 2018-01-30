@@ -42,6 +42,33 @@ const testSnakeCollision01 = new ModelTest('_snakeCollision test 01',
   _snakeCollision);
 modelTestArr.push(testSnakeCollision00, testSnakeCollision01);
 
+// Contract _wallCollision: snake, number, number -> boolean
+function _wallCollision(snake, xMax, yMax) {
+  if(! snake instanceof Snake) {
+    throw new Error('_wallCollision: first arg must be snake object');
+  } else if(typeof xMax != 'number' || typeof yMax != 'number') {
+    throw new Error('_wallCollision: xMax, and yMax must be numbers');
+  }
+  let head = snake.positionArray[0];
+  if(head[0] < 0 || head[0] > xMax) {
+    return true;
+  } else if (head[1] < 0 || head[1] > yMax) {
+    return true;
+  } else {
+    return false;
+  }
+}
+// Tests
+const testWallCollision00 = new ModelTest('_wallCollision test 00',
+  [new Snake([[-1,0],[0,0],[1,0]], 'left', 0), 9, 9],
+  true,
+  _wallCollision);
+const testWallCollision01 = new ModelTest('_wallCollision test 01',
+  [new Snake([[9,9],[9,8],[9,7]], 'down', 0), 9, 9],
+  false,
+  _wallCollision);
+modelTestArr.push(testWallCollision00, testWallCollision01);
+
 // Contract: nextSnake: snake, newDir, addGrowth -> snake
 // Purpose: To generate the next snake given an old snake, a new direction,
 // and a new amount to grow.
