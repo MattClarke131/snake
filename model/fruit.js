@@ -4,15 +4,15 @@
 class Fruit extends GameEntity {
   constructor(positionArray, pointValue, remainingLifeSpan) {
     super(positionArray);
-    if (typeof pointValue != number) {
+    if (typeof pointValue != 'number') {
       throw new Error('pointValue must be a number');
-    } else if (typeof remainingLifeSpan != number) {
+    } else if (typeof remainingLifeSpan != 'number') {
       throw new Error('remainingLifeSpan must be a number');
     }
-    this._pointvalue = pointValue;
+    this._pointValue = pointValue;
     this._remainingLifeSpan = remainingLifeSpan;
   }
-  get pointvalue() {
+  get pointValue() {
     return this._pointValue;
   }
   get remainingLifeSpan() {
