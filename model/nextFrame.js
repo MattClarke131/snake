@@ -25,6 +25,22 @@ const testSelfCollision01 = new ModelTest('_selfCollision test 01',
   _selfCollision);
 modelTestArr.push(testSelfCollision00, testSelfCollision01);
 
+// Contract _snakeCollision: snake, snake -> boolean
+function _snakeCollision(colliderSnake, collideeSnake) {
+  let head = colliderSnake.positionArray[0];
+  let snakeCoords = collideeSnake.positionArray;
+  return _isInCoordArray(head, snakeCoords);
+}
+// Tests
+const testSnakeCollision00 = new ModelTest('_snakeCollision test 00',
+  [new Snake([[2,2],[2,1],[2,0]],'up', 0), new Snake([[4,2],[3,2],[2,2]],'right', 0)],
+  true,
+  _snakeCollision);
+const testSnakeCollision01 = new ModelTest('_snakeCollision test 01',
+  [new Snake([[2,2],[2,1],[2,0]],'up', 0), new Snake([[7,5],[6,5],[5,5]],'right', 0)],
+  false,
+  _snakeCollision);
+modelTestArr.push(testSnakeCollision00, testSnakeCollision01);
 
 // Contract: nextSnake: snake, newDir, addGrowth -> snake
 // Purpose: To generate the next snake given an old snake, a new direction,

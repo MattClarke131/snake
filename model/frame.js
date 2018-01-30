@@ -1,7 +1,7 @@
 // frame constructor
 // A frame is an object with a height, a width, a tickValue, a snakeArray,
 // and a fruit array.
-class frame {
+class Frame {
   constructor(height, width, tickValue, snakeArray, fruitArray, gameOver) {
     if (typeof height != 'number') {
       throw new Error('height must be a number');
