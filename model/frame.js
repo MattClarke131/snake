@@ -2,7 +2,7 @@
 // A frame is an object with a height, a width, a tickValue, a snakeArray,
 // and a fruit array.
 class frame {
-  constructor(height, width, tickValue, snakeArray, fruitArray) {
+  constructor(height, width, tickValue, snakeArray, fruitArray, gameOver) {
     if (typeof height != 'number') {
       throw new Error('height must be a number');
     } else if (height < 2) {
@@ -26,12 +26,16 @@ class frame {
         throw new Error('fruitArray must contain only fruit objects');
       }
     }
+    if (typeof gameOver != 'boolean') {
+      throw new Error('gameOver must be a boolean');
+    }
 
     this._height = height;
     this._width = width;
     this._tickValue = tickValue;
     this._snakeArray = snakeArray;
     this._fruitArray = fruitArray;
+    this._gameOver = gameOver;
   }
   get height() {
     return this._height;
@@ -47,5 +51,8 @@ class frame {
   }
   get fruitArray() {
     return this._fruitArray;
+  }
+  get gameOver() {
+    return this._gameOver;
   }
 };
