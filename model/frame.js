@@ -1,16 +1,16 @@
 // frame constructor
-// A frame is an object with a height, a width, a tickValue, a snakeArray,
+// A frame is an object with a yMax, a xMax, a tickValue, a snakeArray,
 // and a fruit array.
 class Frame {
-  constructor(height, width, tickValue, snakeArray, fruitArray, gameOver) {
-    if (typeof height != 'number') {
-      throw new Error('height must be a number');
-    } else if (height < 2) {
-      throw new Error('height must be at least 2');
-    } else if (typeof width != 'number') {
-      throw new Error('width must be a number');
-    } else if (width <2) {
-      throw new Error('width must be at least 2');
+  constructor(yMax, xMax, tickValue, snakeArray, fruitArray, gameOver) {
+    if (typeof yMax != 'number') {
+      throw new Error('yMax must be a number');
+    } else if (yMax < 2) {
+      throw new Error('yMax must be at least 2');
+    } else if (typeof xMax != 'number') {
+      throw new Error('xMax must be a number');
+    } else if (xMax <2) {
+      throw new Error('xMax must be at least 2');
     } else if (typeof tickValue != 'number') {
       throw new Error('tickValue must be a number');
     } else if(tickValue < 0) {
@@ -30,18 +30,18 @@ class Frame {
       throw new Error('gameOver must be a boolean');
     }
 
-    this._height = height;
-    this._width = width;
+    this._yMax = yMax;
+    this._xMax = xMax;
     this._tickValue = tickValue;
     this._snakeArray = snakeArray;
     this._fruitArray = fruitArray;
     this._gameOver = gameOver;
   }
-  get height() {
-    return this._height;
+  get yMax() {
+    return this._yMax;
   }
-  get width() {
-    return this._width;
+  get xMax() {
+    return this._xMax;
   }
   get tickValue() {
     return this._tickValue;
