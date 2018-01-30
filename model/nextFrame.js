@@ -105,3 +105,24 @@ const testNewSnakePos06 = new ModelTest('newSnakePos test 06',
   newSnakePos);
 modelTestArr.push(testNewSnakePos00, testNewSnakePos01, testNewSnakePos02,
   testNewSnakePos03, testNewSnakePos04, testNewSnakePos05, testNewSnakePos06);
+
+// Contract: _isInCoordArray: coordinate pair, coordinate array -> boolean
+// Purpose: To test if a coordinate is in a coordinate array
+function _isInCoordArray(coord, coordArr) {
+  for(let i=0; i<coordArr.length; i++) {
+    if(coord[0] == coordArr[i][0] && coord[1] == coordArr[i][1]) {
+      return true;
+    }
+  }
+  return false;
+}
+// Tests:
+const testIsInCoordArray00 = new ModelTest('_isInCoordArray test 00',
+  [[1,2],[[1,1],[1,2],[1,3]]],
+  true,
+  _isInCoordArray);
+const testIsInCoordArray01 = new ModelTest('_isInCoordArray test 01',
+  [[3,3],[[1,1],[1,2],[1,3]]],
+  false,
+  _isInCoordArray);
+modelTestArr.push(testIsInCoordArray00, testIsInCoordArray01);
