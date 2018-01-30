@@ -107,6 +107,41 @@ modelTestArr.push(testNewSnakePos00, testNewSnakePos01, testNewSnakePos02,
   testNewSnakePos03, testNewSnakePos04, testNewSnakePos05, testNewSnakePos06);
 
 
+// Contract: newFruit: fullArray, height, width, pointValue, newLifeSpan -> fruit
+// Purpose: To generate a new fruit on an empty board. New fruits will be on
+// empty coordinates
+// Examples: newFruit([[1,2],[1,3],[2,3],[3,3]]) = fruit
+// Definition:
+function createUnblockedFruit(fullArray, xMax, yMax, pointValue, newLifeSpan) {
+  if(Array.isArray(fullArray) == false) {
+    throw new Error('createUnblockedFruit: fullArray must be an array');
+  } else if (typeof xMax != 'number' || typeof yMax != 'number') {
+    throw new Error('creatUnblockedFruit: xMax and ymax must be numbers');
+  } else if (typeof pointValue != 'number') {
+    throw new Error('createUnblockedFruit: pointValue must be a number');
+  } else if (typeof newLifeSpan != 'number') {
+    throw new Error('createUnblockedFruit: newLifeSpan must be a number');
+  }
+  let newCoordPair = [_findOpenCoord(fullArray, xMax, yMax)];
+  let newFruit = new Fruit(newCoordPair, pointValue, newLifeSpan);
+  return newFruit;
+}
+// Tests:
+const testCreateUnblockedFruit00 = new ModelTest('createUnblockedFruit test 00',
+  [[[0,0],[0,1],[0,2],[2,2]], 2, 2, 1, 20],
+  true,
+  function(a,b,c,d,e) {return createUnblockedFruit(a,b,c,d,e) instanceof Fruit});
+const testCreateUnblockedFruit01 = new ModelTest('createUnblockedFruit test 01',
+  [[[0,0],[0,1],[0,2],[2,2]], 2, 2, 1, 20],
+  true,
+  function(a,b,c,d,e) {return createUnblockedFruit(a,b,c,d,e).pointValue == d});
+const testCreateUnblockedFruit02 = new ModelTest('createUnblockedFruit test 02',
+  [[[0,0],[0,1],[0,2],[2,2]], 2, 2, 1, 20],
+  true,
+  function(a,b,c,d,e) {return createUnblockedFruit(a,b,c,d,e).remainingLifeSpan == e});
+modelTestArr.push(testCreateUnblockedFruit00, testCreateUnblockedFruit01,
+  testCreateUnblockedFruit02);
+
 // Contract: findOpenCoord: fullArray, xMax, yMax -> coordPair
 // Purpose: To pick a random coordinate given an array of unnacceptable coordinates
 // Definition:
