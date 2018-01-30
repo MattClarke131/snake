@@ -106,6 +106,31 @@ const testNewSnakePos06 = new ModelTest('newSnakePos test 06',
 modelTestArr.push(testNewSnakePos00, testNewSnakePos01, testNewSnakePos02,
   testNewSnakePos03, testNewSnakePos04, testNewSnakePos05, testNewSnakePos06);
 
+
+// Contract: findOpenCoord: fullArray, xMax, yMax -> coordPair
+// Purpose: To pick a random coordinate given an array of unnacceptable coordinates
+// Definition:
+function _findOpenCoord(fullArray, xMax, yMax) {
+  if(Array.isArray(fullArray) == false) {
+    throw new Error('_findOpenCoord: fullArray must be an array of coordinates');
+  } else if(typeof xMax != 'number' || typeof yMax != 'number') {
+    throw new Error('_findOpenCoord: xMax and yMax must be numbers')
+  }
+  let openCoordArr = [];
+  for(let x=0; x<=xMax; x++) {
+    for(let y=0; y<=yMax; y++) {
+      if(! _isInCoordArray([x,y],fullArray)) {
+        openCoordArr.push([x,y]);
+      }
+    }
+  }
+  if (openCoordArr.length == 0) {
+    throw new Error('board is completely full!');
+  }
+  let randomIndex = Math.floor(Math.random() * openCoordArr.length)
+  return openCoordArr[randomIndex];
+}
+
 // Contract: _isInCoordArray: coordinate pair, coordinate array -> boolean
 // Purpose: To test if a coordinate is in a coordinate array
 function _isInCoordArray(coord, coordArr) {
