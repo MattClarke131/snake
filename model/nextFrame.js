@@ -6,24 +6,9 @@ function nextFrame(frame, newDirArray) {
 }
 // Tests:
 
-// Contract _selfCollision: snake -> boolean
-// Purpose: determine if a snake has collided with itself
 // Definition:
-function _selfCollision(snake) {
-  let head = snake.positionArray[0];
-  let body = snake.positionArray.slice(1);
-  return _isInCoordArray(head, body);
 }
 // Tests:
-const testSelfCollision00 = new ModelTest('_selfCollision test 00',
-  [new Snake([[0,2],[0,1],[0,0],[1,0],[2,0]],'down', 0)],
-  false,
-  _selfCollision);
-const testSelfCollision01 = new ModelTest('_selfCollision test 01',
-  [new Snake([[3,3],[2,3],[1,3],[1,2],[2,2],[3,2],[3,3],[3,4]],'down', 0)],
-  true,
-  _selfCollision);
-modelTestArr.push(testSelfCollision00, testSelfCollision01);
 
 // Contract: _filterSnakeCollision: snakeArray -> snakeArray
 // Purpose: Remove all snakes that are colliding with other snakes from an array.
