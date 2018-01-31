@@ -25,7 +25,46 @@ const testSelfCollision01 = new ModelTest('_selfCollision test 01',
   _selfCollision);
 modelTestArr.push(testSelfCollision00, testSelfCollision01);
 
-// Contract _snakeCollision: snake, snake -> boolean
+// Contract: _filterSnakeCollision: snakeArray -> snakeArray
+// Purpose: Remove all snakes that are colliding with other snakes from an array.
+function _filterSnakeCollision(snakeArray) {
+  let newSnakeArray = [];
+  for (let i=0; i<snakeArray.length; i++) {
+    let snakeLives = true;
+    for(j=0; j<snakeArray.length; j++) {
+      if(i!=j && _snakeCollision(snakeArray[i],snakeArray[j])) {
+        snakeLives = false;
+      }
+    }
+    if(snakeLives){
+      newSnakeArray.push(snakeArray[i]);
+    }
+  }
+  return newSnakeArray;
+}
+// Tests:
+const testFilterSnakeCollision00 = new ModelTest('_filterSnakeCollision test 00',
+  [[new Snake([[1,1],[1,2],[1,3]], 'up', 0), new Snake([[5,5],[5,4],[5,3]], 'down', 0)]],
+  [new Snake([[1,1],[1,2],[1,3]], 'up', 0), new Snake([[5,5],[5,4],[5,3]], 'down', 0)],
+  _filterSnakeCollision);
+const testFilterSnakeCollision01 = new ModelTest('_filterSnakeCollision test 01',
+  [[new Snake([[1,1],[1,2],[1,3]], 'up', 0), new Snake([[1,3],[2,3],[3,3]], 'left', 0)]],
+  [new Snake([[1,1],[1,2],[1,3]], 'up', 0)],
+  _filterSnakeCollision);
+const testFilterSnakeCollision02 = new ModelTest('_filterSnakeCollision test 02',
+  [[new Snake([[2,3],[2,2],[1,2],[1,3]], 'up', 0), new Snake([[1,3],[2,3],[3,3]], 'left', 0)]],
+  [],
+  _filterSnakeCollision);
+const testFilterSnakeCollision03 = new ModelTest('_filterSnakeCollision test 03',
+  [[new Snake([[0,0],[1,0],[2,0],[2,1]], 'left', 0),
+    new Snake([[2,1],[2,2],[1,2],[1,1]], 'up', 0),
+    new Snake([[1,1],[0,1],[0,0]], 'right', 0)]],
+  [],
+  _filterSnakeCollision);
+modelTestArr.push(testFilterSnakeCollision00, testFilterSnakeCollision01,
+  testFilterSnakeCollision02, testFilterSnakeCollision03);
+
+// Contract: _snakeCollision: snake, snake -> boolean
 function _snakeCollision(colliderSnake, collideeSnake) {
   let head = colliderSnake.positionArray[0];
   let snakeCoords = collideeSnake.positionArray;
