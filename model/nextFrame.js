@@ -26,29 +26,29 @@ function _filterFrameCollisions(frame) {
 }
 // Tests:
 const testFilterFrameCollisions00 = new ModelTest('_filterFrameCollisions test 00',
-  [new Frame(9, 9, 1, [new Snake([[1,2],[2,2],[3,2]], 'left', 0)], [new Fruit([[4,4]], 1, 100)], false)],
-  new Frame(9, 9, 1, [new Snake([[1,2],[2,2],[3,2]], 'left', 0)], [new Fruit([[4,4]], 1, 100)], false),
+  [new Frame(9, 9, 1, [new Snake(0, [[1,2],[2,2],[3,2]], 'left', 0)], [new Fruit([[4,4]], 1, 100)], false)],
+  new Frame(9, 9, 1, [new Snake(0, [[1,2],[2,2],[3,2]], 'left', 0)], [new Fruit([[4,4]], 1, 100)], false),
  _filterFrameCollisions);
 const testFilterFrameCollisions01 = new ModelTest('_filterFrameCollisions test 01',
-  [new Frame(9, 9, 1, [new Snake([[1,2],[2,2],[3,2]], 'left', 0)], [new Fruit([[1,2]], 1, 100)], false)],
-  new Frame(9, 9, 1, [new Snake([[1,2],[2,2],[3,2]], 'left', 1)], [], false),
+  [new Frame(9, 9, 1, [new Snake(0, [[1,2],[2,2],[3,2]], 'left', 0)], [new Fruit([[1,2]], 1, 100)], false)],
+  new Frame(9, 9, 1, [new Snake(0, [[1,2],[2,2],[3,2]], 'left', 1)], [], false),
  _filterFrameCollisions);
 const testFilterFrameCollisions02 = new ModelTest('_filterFrameCollisions test 02',
-  [new Frame(9, 9, 1, [new Snake([[1,2],[2,2],[2,1],[1,1],[1,2]], 'left', 0)], [new Fruit([[4,4]], 1, 100)], false)],
+  [new Frame(9, 9, 1, [new Snake(0, [[1,2],[2,2],[2,1],[1,1],[1,2]], 'left', 0)], [new Fruit([[4,4]], 1, 100)], false)],
   new Frame(9, 9, 1, [], [new Fruit([[4,4]], 1, 100)], false),
  _filterFrameCollisions);
 const testFilterFrameCollisions03 = new ModelTest('_filterFrameCollisions test 03',
-  [new Frame(9, 9, 1, [new Snake([[1,2],[2,2],[3,2]], 'left', 0), new Snake([[0,-1],[0,0],[0,1]], 'up', 0)], [new Fruit([[4,4]], 1, 100)], false)],
-  new Frame(9, 9, 1, [new Snake([[1,2],[2,2],[3,2]], 'left', 0)], [new Fruit([[4,4]], 1, 100)], false),
+  [new Frame(9, 9, 1, [new Snake(0, [[1,2],[2,2],[3,2]], 'left', 0), new Snake(1, [[0,-1],[0,0],[0,1]], 'up', 0)], [new Fruit([[4,4]], 1, 100)], false)],
+  new Frame(9, 9, 1, [new Snake(0, [[1,2],[2,2],[3,2]], 'left', 0)], [new Fruit([[4,4]], 1, 100)], false),
  _filterFrameCollisions);
 const testFilterFrameCollisions04 = new ModelTest('_filterFrameCollisions test 04',
-  [new Frame(9, 9, 1, [new Snake([[10,2],[9,2],[8,2]], 'right', 0), new Snake([[0,-1],[0,0],[0,1]], 'up', 0)], [new Fruit([[4,4]], 1, 100)], false)],
+  [new Frame(9, 9, 1, [new Snake(0, [[10,2],[9,2],[8,2]], 'right', 0), new Snake(1, [[0,-1],[0,0],[0,1]], 'up', 0)], [new Fruit([[4,4]], 1, 100)], false)],
   new Frame(9, 9, 1, [], [new Fruit([[4,4]], 1, 100)], false),
  _filterFrameCollisions);
 const testFilterFrameCollisions05 = new ModelTest('_filterFrameCollisions test 05',
-  [new Frame(9, 9, 1, [new Snake([[1,2],[2,2],[3,2]], 'left', 0), new Snake([[1,0],[0,0],[0,1]], 'right', 0)],
+  [new Frame(9, 9, 1, [new Snake(0, [[1,2],[2,2],[3,2]], 'left', 0), new Snake(1, [[1,0],[0,0],[0,1]], 'right', 0)],
     [new Fruit([[1,2]], 1, 100), new Fruit([[1,0]], 1, 100)], false)],
-  new Frame(9, 9, 1, [new Snake([[1,2],[2,2],[3,2]], 'left', 1), new Snake([[1,0],[0,0],[0,1]], 'right', 1)],
+  new Frame(9, 9, 1, [new Snake(0, [[1,2],[2,2],[3,2]], 'left', 1), new Snake(1, [[1,0],[0,0],[0,1]], 'right', 1)],
     [], false),
  _filterFrameCollisions);
 modelTestArr.push(testFilterFrameCollisions00, testFilterFrameCollisions01,
@@ -74,21 +74,21 @@ function _filterSnakeCollision(snakeArray) {
 }
 // Tests:
 const testFilterSnakeCollision00 = new ModelTest('_filterSnakeCollision test 00',
-  [[new Snake([[1,1],[1,2],[1,3]], 'up', 0), new Snake([[5,5],[5,4],[5,3]], 'down', 0)]],
-  [new Snake([[1,1],[1,2],[1,3]], 'up', 0), new Snake([[5,5],[5,4],[5,3]], 'down', 0)],
+  [[new Snake(0, [[1,1],[1,2],[1,3]], 'up', 0), new Snake(1, [[5,5],[5,4],[5,3]], 'down', 0)]],
+  [new Snake(0, [[1,1],[1,2],[1,3]], 'up', 0), new Snake(1, [[5,5],[5,4],[5,3]], 'down', 0)],
   _filterSnakeCollision);
 const testFilterSnakeCollision01 = new ModelTest('_filterSnakeCollision test 01',
-  [[new Snake([[1,1],[1,2],[1,3]], 'up', 0), new Snake([[1,3],[2,3],[3,3]], 'left', 0)]],
-  [new Snake([[1,1],[1,2],[1,3]], 'up', 0)],
+  [[new Snake(0, [[1,1],[1,2],[1,3]], 'up', 0), new Snake(1, [[1,3],[2,3],[3,3]], 'left', 0)]],
+  [new Snake(0, [[1,1],[1,2],[1,3]], 'up', 0)],
   _filterSnakeCollision);
 const testFilterSnakeCollision02 = new ModelTest('_filterSnakeCollision test 02',
-  [[new Snake([[2,3],[2,2],[1,2],[1,3]], 'up', 0), new Snake([[1,3],[2,3],[3,3]], 'left', 0)]],
+  [[new Snake(0, [[2,3],[2,2],[1,2],[1,3]], 'up', 0), new Snake(1, [[1,3],[2,3],[3,3]], 'left', 0)]],
   [],
   _filterSnakeCollision);
 const testFilterSnakeCollision03 = new ModelTest('_filterSnakeCollision test 03',
-  [[new Snake([[0,0],[1,0],[2,0],[2,1]], 'left', 0),
-    new Snake([[2,1],[2,2],[1,2],[1,1]], 'up', 0),
-    new Snake([[1,1],[0,1],[0,0]], 'right', 0)]],
+  [[new Snake(0, [[0,0],[1,0],[2,0],[2,1]], 'left', 0),
+    new Snake(1, [[2,1],[2,2],[1,2],[1,1]], 'up', 0),
+    new Snake(2, [[1,1],[0,1],[0,0]], 'right', 0)]],
   [],
   _filterSnakeCollision);
 modelTestArr.push(testFilterSnakeCollision00, testFilterSnakeCollision01,
@@ -102,11 +102,11 @@ function _snakeCollision(colliderSnake, collideeSnake) {
 }
 // Tests
 const testSnakeCollision00 = new ModelTest('_snakeCollision test 00',
-  [new Snake([[2,2],[2,1],[2,0]],'up', 0), new Snake([[4,2],[3,2],[2,2]],'right', 0)],
+  [new Snake(0, [[2,2],[2,1],[2,0]],'up', 0), new Snake(1, [[4,2],[3,2],[2,2]],'right', 0)],
   true,
   _snakeCollision);
 const testSnakeCollision01 = new ModelTest('_snakeCollision test 01',
-  [new Snake([[2,2],[2,1],[2,0]],'up', 0), new Snake([[7,5],[6,5],[5,5]],'right', 0)],
+  [new Snake(0, [[2,2],[2,1],[2,0]],'up', 0), new Snake(1, [[7,5],[6,5],[5,5]],'right', 0)],
   false,
   _snakeCollision);
 modelTestArr.push(testSnakeCollision00, testSnakeCollision01);
@@ -121,13 +121,13 @@ function _selfCollision(snake) {
 }
 // Tests:
 const testSelfCollision00 = new ModelTest('_selfCollision test 00',
-  [new Snake([[0,2],[0,1],[0,0],[1,0],[2,0]],'down', 0)],
+  [new Snake(0, [[0,2],[0,1],[0,0],[1,0],[2,0]],'down', 0)],
   false,
   _selfCollision);
 const testSelfCollision01 = new ModelTest('_selfCollision test 01',
-[new Snake([[3,3],[2,3],[1,3],[1,2],[2,2],[3,2],[3,3],[3,4]],'down', 0)],
-true,
-_selfCollision);
+  [new Snake(0, [[3,3],[2,3],[1,3],[1,2],[2,2],[3,2],[3,3],[3,4]],'down', 0)],
+  true,
+  _selfCollision);
 modelTestArr.push(testSelfCollision00, testSelfCollision01);
 
 // Contract: _wallCollision: snake, number, number -> boolean
@@ -148,11 +148,11 @@ function _wallCollision(snake, xMax, yMax) {
 }
 // Tests
 const testWallCollision00 = new ModelTest('_wallCollision test 00',
-  [new Snake([[-1,0],[0,0],[1,0]], 'left', 0), 9, 9],
+  [new Snake(0, [[-1,0],[0,0],[1,0]], 'left', 0), 9, 9],
   true,
   _wallCollision);
 const testWallCollision01 = new ModelTest('_wallCollision test 01',
-  [new Snake([[9,9],[9,8],[9,7]], 'down', 0), 9, 9],
+  [new Snake(0, [[9,9],[9,8],[9,7]], 'down', 0), 9, 9],
   false,
   _wallCollision);
 modelTestArr.push(testWallCollision00, testWallCollision01);
@@ -172,7 +172,7 @@ function _filterSnakeFruitArrays(snakeArray, fruitArray) {
         let currentSnake = snakeArray[j];
         let currentFruitValue = fruitArray[i].pointValue;
         let newGrowth = currentSnake.remainingGrowth + currentFruitValue;
-        let newSnake = new Snake(currentSnake.positionArray, currentSnake.direction, newGrowth);
+        let newSnake = new Snake(currentSnake.id, currentSnake.positionArray, currentSnake.direction, newGrowth);
         newSnakeArray[j] = newSnake;
       }
     }
@@ -184,21 +184,21 @@ function _filterSnakeFruitArrays(snakeArray, fruitArray) {
 }
 // Tests
 const testFilterSnakeFruitArrays00 = new ModelTest('_filterSnakeFruitArrays test 00',
-  [[new Snake([[0,0]], 'up', 0)],[new Fruit([[0,0]], 1, 100)]],
-  [[new Snake([[0,0]], 'up', 1)],[]],
+  [[new Snake(0, [[0,0]], 'up', 0)],[new Fruit([[0,0]], 1, 100)]],
+  [[new Snake(0, [[0,0]], 'up', 1)],[]],
   _filterSnakeFruitArrays);
 const testFilterSnakeFruitArrays01 = new ModelTest('_filterSnakeFruitArrays test 01',
-  [[new Snake([[0,0]], 'up', 0)],[new Fruit([[1,1]], 1, 100)]],
-  [[new Snake([[0,0]], 'up', 0)],[new Fruit([[1,1]], 1, 100)]],
+  [[new Snake(0, [[0,0]], 'up', 0)],[new Fruit([[1,1]], 1, 100)]],
+  [[new Snake(0, [[0,0]], 'up', 0)],[new Fruit([[1,1]], 1, 100)]],
   _filterSnakeFruitArrays);
 const testFilterSnakeFruitArrays02 = new ModelTest('_filterSnakeFruitArrays test 02',
-  [[new Snake([[0,0]], 'up', 0), new Snake([[4,4]], 'left', 2)],
+  [[new Snake(0, [[0,0]], 'up', 0), new Snake(1, [[4,4]], 'left', 2)],
     [new Fruit([[0,0]], 1, 100), new Fruit([[4,4]], 1, 100)]],
-  [[new Snake([[0,0]], 'up', 1), new Snake([[4,4]], 'left', 3)],[]],
+  [[new Snake(0, [[0,0]], 'up', 1), new Snake(1, [[4,4]], 'left', 3)],[]],
   _filterSnakeFruitArrays);
 const testFilterSnakeFruitArrays03 = new ModelTest('_filterSnakeFruitArrays test 03',
-  [[new Snake([[0,0]], 'up', 0)],[new Fruit([[0,0]], 5, 100)]],
-  [[new Snake([[0,0]], 'up', 5)],[]],
+  [[new Snake(0, [[0,0]], 'up', 0)],[new Fruit([[0,0]], 5, 100)]],
+  [[new Snake(0, [[0,0]], 'up', 5)],[]],
   _filterSnakeFruitArrays);
 modelTestArr.push(testFilterSnakeFruitArrays00, testFilterSnakeFruitArrays01,
   testFilterSnakeFruitArrays02, testFilterSnakeFruitArrays03);
@@ -211,11 +211,11 @@ function _fruitCollision(snake, fruit) {
 }
 // Tests
 const testFruitCollision00 = new ModelTest('_fruitCollision test 00',
-  [new Snake([[3,3],[4,3],[5,3]], 'left', 0), new Fruit([[3,3]], 1, 100),],
+  [new Snake(0, [[3,3],[4,3],[5,3]], 'left', 0), new Fruit([[3,3]], 1, 100),],
   true,
   _fruitCollision);
 const testFruitCollision01 = new ModelTest('_fruitCollision test 01',
-    [new Snake([[3,3],[4,3],[5,3]], 'left', 0), new Fruit([[4,4]], 1, 100),],
+    [new Snake(0, [[3,3],[4,3],[5,3]], 'left', 0), new Fruit([[4,4]], 1, 100),],
   false,
   _fruitCollision);
 modelTestArr.push(testFruitCollision00, testFruitCollision01);
@@ -231,21 +231,21 @@ function nextSnake(snake, newDir, addGrowth) {
   if(newGrowth > 0) {
     newGrowth -= 1;
   }
-  let newSnake = new Snake(newPos, newDir, newGrowth);
+  let newSnake = new Snake(snake.id, newPos, newDir, newGrowth);
   return newSnake;
 }
 // Tests:
 const testNextSnake00 = new ModelTest('nextSnake test 00',
-  [new Snake([[1,2],[1,3],[1,4]], 'down', 0), 'down', 0],
-  new Snake([[1,1],[1,2],[1,3]], 'down', 0),
+  [new Snake(0, [[1,2],[1,3],[1,4]], 'down', 0), 'down', 0],
+  new Snake(0, [[1,1],[1,2],[1,3]], 'down', 0),
   nextSnake);
 const testNextSnake01 = new ModelTest('nextSnake test 01',
-  [new Snake([[1,2],[1,3],[1,4]], 'down', 0), 'right', 0],
-  new Snake([[2,2],[1,2],[1,3]], 'right', 0),
+  [new Snake(0, [[1,2],[1,3],[1,4]], 'down', 0), 'right', 0],
+  new Snake(0, [[2,2],[1,2],[1,3]], 'right', 0),
   nextSnake);
 const testNextSnake02 = new ModelTest('nextSnake test 02',
-  [new Snake([[1,4],[1,3],[1,2]], 'up', 0), 'up', 1],
-  new Snake([[1,5],[1,4],[1,3],[1,2]], 'up', 0),
+  [new Snake(0, [[1,4],[1,3],[1,2]], 'up', 0), 'up', 1],
+  new Snake(0, [[1,5],[1,4],[1,3],[1,2]], 'up', 0),
   nextSnake);
 modelTestArr.push(testNextSnake00, testNextSnake01, testNextSnake02);
 
