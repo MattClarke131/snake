@@ -6,9 +6,54 @@ function nextFrame(frame, newDirArray) {
 }
 // Tests:
 
+// Contract:_filterFrameCollisions: frame -> frame
+// Purpose: To apply collision game logic to a frame
 // Definition:
+function _filterFrameCollisions(frame) {
+  let newSnakeArray = frame.snakeArray;
+  let newFruitArray = frame.fruitArray;
+  newSnakeArray = _filterSnakeCollision(newSnakeArray);
+  newSnakeArray = newSnakeArray.filter(e => !_selfCollision(e));
+  newSnakeArray = newSnakeArray.filter(e => !_wallCollision(e,frame.xMax,frame.yMax));
+  newSnakeArray = _filterSnakeFruitArrays(newSnakeArray, newFruitArray)[0];
+  newFruitArray = _filterSnakeFruitArrays(newSnakeArray, newFruitArray)[1];
+  let xMax = frame.xMax;
+  let yMax = frame.yMax;
+  let tickValue = frame.tickValue;
+  let gameOver = frame.gameOver;
+  let newFrame = new Frame(xMax, yMax, tickValue, newSnakeArray, newFruitArray, gameOver);
+  return newFrame
 }
 // Tests:
+const testFilterFrameCollisions00 = new ModelTest('_filterFrameCollisions test 00',
+  [new Frame(9, 9, 1, [new Snake([[1,2],[2,2],[3,2]], 'left', 0)], [new Fruit([[4,4]], 1, 100)], false)],
+  new Frame(9, 9, 1, [new Snake([[1,2],[2,2],[3,2]], 'left', 0)], [new Fruit([[4,4]], 1, 100)], false),
+ _filterFrameCollisions);
+const testFilterFrameCollisions01 = new ModelTest('_filterFrameCollisions test 01',
+  [new Frame(9, 9, 1, [new Snake([[1,2],[2,2],[3,2]], 'left', 0)], [new Fruit([[1,2]], 1, 100)], false)],
+  new Frame(9, 9, 1, [new Snake([[1,2],[2,2],[3,2]], 'left', 1)], [], false),
+ _filterFrameCollisions);
+const testFilterFrameCollisions02 = new ModelTest('_filterFrameCollisions test 02',
+  [new Frame(9, 9, 1, [new Snake([[1,2],[2,2],[2,1],[1,1],[1,2]], 'left', 0)], [new Fruit([[4,4]], 1, 100)], false)],
+  new Frame(9, 9, 1, [], [new Fruit([[4,4]], 1, 100)], false),
+ _filterFrameCollisions);
+const testFilterFrameCollisions03 = new ModelTest('_filterFrameCollisions test 03',
+  [new Frame(9, 9, 1, [new Snake([[1,2],[2,2],[3,2]], 'left', 0), new Snake([[0,-1],[0,0],[0,1]], 'up', 0)], [new Fruit([[4,4]], 1, 100)], false)],
+  new Frame(9, 9, 1, [new Snake([[1,2],[2,2],[3,2]], 'left', 0)], [new Fruit([[4,4]], 1, 100)], false),
+ _filterFrameCollisions);
+const testFilterFrameCollisions04 = new ModelTest('_filterFrameCollisions test 04',
+  [new Frame(9, 9, 1, [new Snake([[10,2],[9,2],[8,2]], 'right', 0), new Snake([[0,-1],[0,0],[0,1]], 'up', 0)], [new Fruit([[4,4]], 1, 100)], false)],
+  new Frame(9, 9, 1, [], [new Fruit([[4,4]], 1, 100)], false),
+ _filterFrameCollisions);
+const testFilterFrameCollisions05 = new ModelTest('_filterFrameCollisions test 05',
+  [new Frame(9, 9, 1, [new Snake([[1,2],[2,2],[3,2]], 'left', 0), new Snake([[1,0],[0,0],[0,1]], 'right', 0)],
+    [new Fruit([[1,2]], 1, 100), new Fruit([[1,0]], 1, 100)], false)],
+  new Frame(9, 9, 1, [new Snake([[1,2],[2,2],[3,2]], 'left', 1), new Snake([[1,0],[0,0],[0,1]], 'right', 1)],
+    [], false),
+ _filterFrameCollisions);
+modelTestArr.push(testFilterFrameCollisions00, testFilterFrameCollisions01,
+  testFilterFrameCollisions02, testFilterFrameCollisions03,
+  testFilterFrameCollisions04, testFilterFrameCollisions05);
 
 // Contract: _filterSnakeCollision: snakeArray -> snakeArray
 // Purpose: Remove all snakes that are colliding with other snakes from an array.
@@ -76,9 +121,9 @@ function _selfCollision(snake) {
 }
 // Tests:
 const testSelfCollision00 = new ModelTest('_selfCollision test 00',
-[new Snake([[0,2],[0,1],[0,0],[1,0],[2,0]],'down', 0)],
-false,
-_selfCollision);
+  [new Snake([[0,2],[0,1],[0,0],[1,0],[2,0]],'down', 0)],
+  false,
+  _selfCollision);
 const testSelfCollision01 = new ModelTest('_selfCollision test 01',
 [new Snake([[3,3],[2,3],[1,3],[1,2],[2,2],[3,2],[3,3],[3,4]],'down', 0)],
 true,
