@@ -112,7 +112,53 @@ const testWallCollision01 = new ModelTest('_wallCollision test 01',
   _wallCollision);
 modelTestArr.push(testWallCollision00, testWallCollision01);
 
-//Contract _fruitCollision: snake, fruit -> boolean
+// Contract _filterSnakeFruitArrays: snakeArray, fruitArray -> array
+function _filterSnakeFruitArrays(snakeArray, fruitArray) {
+  let newFruitArray = [];
+  let newSnakeArray = [];
+  for (let i=0; i<snakeArray.length; i++) {
+    newSnakeArray.push(snakeArray[i]);
+  }
+  for (let i=0; i<fruitArray.length; i++) {
+    let uneaten = true;
+    for (let j=0; j<snakeArray.length; j++) {
+      if (_fruitCollision(snakeArray[j], fruitArray[i])) {
+        uneaten = false;
+        let currentSnake = snakeArray[j];
+        let currentFruitValue = fruitArray[i].pointValue;
+        let newGrowth = currentSnake.remainingGrowth + currentFruitValue;
+        let newSnake = new Snake(currentSnake.positionArray, currentSnake.direction, newGrowth);
+        newSnakeArray[j] = newSnake;
+      }
+    }
+    if(uneaten) {
+      newFruitArray.push(fruitArray[i]);
+    }
+  }
+  return [newSnakeArray, newFruitArray];
+}
+// Tests
+const testFilterSnakeFruitArrays00 = new ModelTest('_filterSnakeFruitArrays test 00',
+  [[new Snake([[0,0]], 'up', 0)],[new Fruit([[0,0]], 1, 100)]],
+  [[new Snake([[0,0]], 'up', 1)],[]],
+  _filterSnakeFruitArrays);
+const testFilterSnakeFruitArrays01 = new ModelTest('_filterSnakeFruitArrays test 01',
+  [[new Snake([[0,0]], 'up', 0)],[new Fruit([[1,1]], 1, 100)]],
+  [[new Snake([[0,0]], 'up', 0)],[new Fruit([[1,1]], 1, 100)]],
+  _filterSnakeFruitArrays);
+const testFilterSnakeFruitArrays02 = new ModelTest('_filterSnakeFruitArrays test 02',
+  [[new Snake([[0,0]], 'up', 0), new Snake([[4,4]], 'left', 2)],
+    [new Fruit([[0,0]], 1, 100), new Fruit([[4,4]], 1, 100)]],
+  [[new Snake([[0,0]], 'up', 1), new Snake([[4,4]], 'left', 3)],[]],
+  _filterSnakeFruitArrays);
+const testFilterSnakeFruitArrays03 = new ModelTest('_filterSnakeFruitArrays test 03',
+  [[new Snake([[0,0]], 'up', 0)],[new Fruit([[0,0]], 5, 100)]],
+  [[new Snake([[0,0]], 'up', 5)],[]],
+  _filterSnakeFruitArrays);
+modelTestArr.push(testFilterSnakeFruitArrays00, testFilterSnakeFruitArrays01,
+  testFilterSnakeFruitArrays02, testFilterSnakeFruitArrays03);
+
+//Contract: _fruitCollision: snake, fruit -> boolean
 function _fruitCollision(snake, fruit) {
   let head = snake.positionArray[0];
   let fruitCoords = fruit.positionArray;
