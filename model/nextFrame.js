@@ -1,10 +1,76 @@
 // Contract: nextFrame : frame, newDirArray -> frame
 // Purpose: To generate the next frame
-// Examples:
 // Definition:
-function nextFrame(frame, newDirArray) {
+
+function nextFrame(frame, newDirDict) {
+  let newSnakeArray = []
+  // For loop to evade JavaScript references behavior
+  for (let i=0; i<frame.snakeArray.length; i++) {
+    newSnakeArray.push(frame.snakeArray[i]);
+  }
+  // For loop to move each snake
+  for(let i=0; i<newSnakeArray.length; i++) {
+    let snake = newSnakeArray[i];
+    let newDir = newDirDict[snake.id];
+    newSnakeArray[i] = nextSnake(snake, newDir, 0);
+  };
+  let newTickValue = frame.tickValue + 1;
+  // Set new tick, and snakeArray values
+  let newFrame = new Frame(frame.yMax, frame.xMax, newTickValue, newSnakeArray, frame.fruitArray, frame.gameOver);
+  // Filter all collisions
+  newFrame = _filterFrameCollisions(newFrame);
+  // Age fruit
+  let newFruitArray = newFrame.fruitArray;
+  newFruitArray = ageFruitArray(newFruitArray);
+  // Generate fruit if there are more snakes than fruit
+  if(newFruitArray.length < newFrame.snakeArray.length) {
+    let fullCoordsArray = [];
+    for(let i=0; i<newFrame.snakeArray.length; i++) {
+      fullCoordsArray.push(newFrame.snakeArray[i].positionArray);
+    }
+    for(let i=0; i<newFrame.fruitArray.length; i++) {
+      fullCoordsArray.push(newFrame.fruitArray[i].positionArray);
+    }
+    let unblockedFruit = createUnblockedFruit(fullCoordsArray, newFrame.xMax, newFrame.yMax, 1, 10000);
+    newFruitArray.push(unblockedFruit);
+  }
+  // Adjust gameOver state
+  if(newFrame.snakeArray.length == 0) {
+    newFrame = new Frame(newFrame.yMax, newFrame.xMax, newFrame.tickValue, newFrame.snakeArray, newFruitArray, true);
+  } else {
+    newFrame = new Frame(newFrame.yMax, newFrame.xMax, newFrame.tickValue, newFrame.snakeArray, newFruitArray, false);
+  }
+  return newFrame;
 }
 // Tests:
+const testNextFrame00 = new ModelTest('nextFrame test 00',
+  [new Frame(9, 9, 0, [new Snake(0, [[4,4],[3,4],[2,4]], 'right', 0)], [new Fruit([[0,0]], 1, 100)], false), {0: 'up'}],
+  new Frame(9, 9, 1, [new Snake(0, [[4,3],[4,4],[3,4]], 'up', 0)], [new Fruit([[0,0]], 1, 99)], false),
+  nextFrame);
+const testNextFrame01 = new ModelTest('nextFrame test 01',
+  [new Frame(9, 9, 10, [new Snake(0, [[5,5],[5,4],[5,3]], 'down', 0), new Snake(1, [[8,8],[7,8],[6,8]], 'left', 1)],
+    [new Fruit([[0,0]], 1, 100), new Fruit([[1,1]], 1, 200)], false), {0: 'right', 1: 'up',}],
+  new Frame(9, 9, 11, [new Snake(0, [[6,5],[5,5],[5,4]], 'right', 0), new Snake(1, [[8,7],[8,8],[7,8],[6,8]], 'up', 0)],
+    [new Fruit([[0,0]], 1, 99), new Fruit([[1,1]], 1, 199)], false),
+  nextFrame);
+const testNextFrame02 = new ModelTest('nextFrame test 02',
+  [new Frame(9, 9, 10, [new Snake(0, [[5,5],[5,4],[5,3]], 'down', 0), new Snake(1, [[4,0],[3,0],[2,0]], 'left', 1)],
+    [new Fruit([[0,0]], 1, 100), new Fruit([[1,1]], 1, 200)], false), {0: 'right', 1: 'up',}],
+  new Frame(9, 9, 11, [new Snake(0, [[6,5],[5,5],[5,4]], 'right', 0)],
+    [new Fruit([[0,0]], 1, 99), new Fruit([[1,1]], 1, 199)], false),
+  nextFrame);
+const testNextFrame03 = new ModelTest('nextFrame test 03',
+  [new Frame(9, 9, 20, [new Snake(0, [[3,4],[3,3],[4,3],[4,4],[4,5]], 'down', 0)], [new Fruit([[0,0]], 1, 100)], false), {0: 'right'}],
+  new Frame(9, 9, 21, [], [new Fruit([[0,0]], 1, 99)], true),
+  nextFrame);
+const testNextFrame04 = new ModelTest('nextFrame test 04',
+  [new Frame(9, 9, 10, [new Snake(0, [[3,4],[3,3],[4,3],[4,4],[4,5]], 'down', 0), new Snake(1, [[4,0],[3,0],[2,0]], 'left', 1)],
+    [new Fruit([[0,0]], 1, 100), new Fruit([[1,1]], 1, 200)], false), {0: 'right', 1: 'up',}],
+  new Frame(9, 9, 11, [],
+    [new Fruit([[0,0]], 1, 99), new Fruit([[1,1]], 1, 199)], true),
+  nextFrame);
+modelTestArr.push(testNextFrame00, testNextFrame01, testNextFrame02,
+  testNextFrame03, testNextFrame04);
 
 // Contract: nextSnake: snake, newDir, addGrowth -> snake
 // Purpose: To generate the next snake given an old snake, a new direction,
