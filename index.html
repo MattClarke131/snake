@@ -1,13 +1,22 @@
 <html>
   <head>
       <meta charset="utf-8">
+      <title>Danger Noodle</title>
+      <link rel="stylesheet" type="text/css" href="style.css">
   </head>
   <body>
+    <div class='snakeGame'>
+      <h1>Danger Noodle</h1>
+      <canvas class="snakeCanvas"></canvas>
+      <p>Score:<span class="score"></span></p>
+    </div>
   </body>
+  <script src="jquery-3.2.1.js"></script>
   <script src="model/modelTest.js"></script>
   <script src="model/gameEntity.js"></script>
   <script src="model/snake.js"></script>
   <script src="model/fruit.js"></script>
   <script src="model/frame.js"></script>
   <script src="model/nextFrame.js"></script>
+  <script src="controller.js"></script>
 </html>
