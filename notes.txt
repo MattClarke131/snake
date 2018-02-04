@@ -1,4 +1,11 @@
 Snake Notes
+
+Poor decisions:
+1. Using JSON.stringify in testing
+2. Putting a magic number in nextFrame
+3. Not putting the whole model into a model constructor
+
+
 // testing
 Q: How can I pass a variable number of arguments into a function
 A: Using ES6, you can use array spread

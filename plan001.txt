@@ -52,6 +52,7 @@ Frame object
 Next Frame function
   frame, action --> frame
   subfunctions:
+    + Change snake directions
     + next snake
     + detect collisions
       + snake wall
@@ -62,13 +63,12 @@ Next Frame function
 Next frame
   + move snakes
   + test collisions
-    + snake self
     + snake other snake
+    + snake self
     + snake wall
     + snake fruit
   + remove snake(s)?
   + update score
-  + update snake growth
   + gameOver?
   + age fruits
   + add fruits if necessary
