@@ -1,7 +1,5 @@
 // Contract: nextFrame : frame, newDirArray -> frame
 // Purpose: To generate the next frame
-// Definition:
-
 function nextFrame(frame, newDirDict) {
   let newSnakeArray = []
   // For loop to evade JavaScript references behavior
@@ -12,6 +10,9 @@ function nextFrame(frame, newDirDict) {
   for(let i=0; i<newSnakeArray.length; i++) {
     let snake = newSnakeArray[i];
     let newDir = newDirDict[snake.id];
+    if(newDir == undefined) {
+      newDir = snake.direction;
+    }
     newSnakeArray[i] = nextSnake(snake, newDir, 0);
   };
   let newTickValue = frame.tickValue + 1;
