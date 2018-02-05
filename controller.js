@@ -11,7 +11,7 @@ SnakeGame.Controller = function(node) {
   let sHColor = '#0F0';
   let sBColor = '#5F5';
   let fColor = '#D00';
-  let nextDir = {};
+  let nextDir = {0: undefined, 1: undefined};
   // public
   return {
     // Model
@@ -59,5 +59,12 @@ SnakeGame.Controller = function(node) {
     _renderPixel(x, y, color) {
       context.fillStyle = color;
       context.fillRect(x*pWidth, y*pHeight, pWidth, pHeight);
-    }
-}
+    },
+    // Game State
+    setNextDir: function(snakeID, dir) {
+      nextDir[snakeID] = dir;
+    },
+    // Debug
+    printNextDir: function() {
+      console.log(nextDir);
+    },
