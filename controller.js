@@ -23,6 +23,7 @@ SnakeGame.Controller = function(node) {
     },
     // initialize
     initialize: function() {
+      clearTimeout(timer);
       this.model.resetGame();
       this.renderFrame(this.model.getCurrentFrame());
       this._setModelCallBack();
@@ -112,6 +113,9 @@ SnakeGame.Controller = function(node) {
           case 39:
             controller.setNextDir(1, 'right');
             break;
+          case 13:
+            controller.initialize();
+            break;
         }
       });
     },
@@ -139,7 +143,7 @@ SnakeGame.Controller = function(node) {
         this.lose();
       } else {
         this.tick();
-        setTimeout(function() {controller.startTimer()}, tickLength);
+        timer = setTimeout(function() {controller.startTimer()}, tickLength);
       };
     },
     // Debug
