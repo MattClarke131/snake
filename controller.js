@@ -11,13 +11,24 @@ SnakeGame.Controller = function(node) {
   let sHColor = '#0F0';
   let sBColor = '#5F5';
   let fColor = '#D00';
-  let nextDir = '';
+  let nextDir = {};
   // public
   return {
-    //Rendering
-    renderInitFrame() {
-      this.renderFrame(initialFrame);
+    // Model
+    model: SnakeGame.Model(),
+    // initialize
+    initialize: function() {
+      this.model.resetGame();
+      this.renderFrame(this.model.getCurrentFrame());
+      this._setModelCallBack();
     },
+    _setModelCallBack: function() {
+      let controller = this;
+      this.model.setContCallback (function() {
+        controller.renderFrame(controller.model.getCurrentFrame());
+      });
+    },
+    // Rendering
     renderFrame(frame) {
       context.fillStyle = bColor;
       context.fillRect(0, 0, pWidth* frame.xMax, pHeight*frame.yMax);
