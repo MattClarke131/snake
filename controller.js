@@ -31,19 +31,19 @@ SnakeGame.Controller = function(node) {
     // Rendering
     renderFrame(frame) {
       context.fillStyle = bColor;
-      context.fillRect(0, 0, pWidth* frame.xMax, pHeight*frame.yMax);
+      context.fillRect(0, 0, pWidth*frame.xMax, pHeight*frame.yMax);
       this._renderSnakes(frame);
       this._renderFruits(frame);
     },
     _renderSnakes(frame) {
       for (let i=0; i<frame.snakeArray.length; i++) {
         let snake = frame.snakeArray[i];
-        let headX = snake.positionArray[0];
-        let headY = snake.positionArray[1];
+        let headX = snake.positionArray[0][0];
+        let headY = snake.positionArray[0][1];
         this._renderPixel(headX, headY, sHColor);
         for (let j=1; j<snake.positionArray.length; j++) {
-          let coord = snake.positionArray[j];
-          this._renderPixel(coord[0], coord[1], sBColor);
+          let bodySegment = snake.positionArray[j];
+          this._renderPixel(bodySegment[0], bodySegment[1], sBColor);
         }
       }
     },
