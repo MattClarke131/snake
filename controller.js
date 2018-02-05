@@ -12,16 +12,22 @@ SnakeGame.Controller = function(node) {
   let sBColor = '#5F5';
   let fColor = '#D00';
   let nextDir = {0: undefined, 1: undefined};
+  let tickLength = 500;
+  let timer = null;
   // public
   return {
     // Model
     model: SnakeGame.Model(),
+    getGameOver: function() {
+      return this.model.getCurrentFrame().gameOver;
+    },
     // initialize
     initialize: function() {
       this.model.resetGame();
       this.renderFrame(this.model.getCurrentFrame());
       this._setModelCallBack();
       this.setKeys();
+      this.startTimer();
     },
     _setModelCallBack: function() {
       let controller = this;
@@ -104,6 +110,22 @@ SnakeGame.Controller = function(node) {
     // Game State
     setNextDir: function(snakeID, dir) {
       nextDir[snakeID] = dir;
+    },
+    tick: function() {
+      this.model.tickGame(nextDir);
+    },
+    lose: function() {
+      alert('you lose');
+    },
+    // Timer
+    startTimer: function() {
+      let controller = this;
+      if(this.getGameOver()) {
+        this.lose();
+      } else {
+        this.tick();
+        setTimeout(function() {controller.startTimer()}, tickLength);
+      };
     },
     // Debug
     printNextDir: function() {
