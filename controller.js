@@ -28,6 +28,13 @@ SnakeGame.Controller = function(node) {
         controller.renderFrame(controller.model.getCurrentFrame());
       });
     },
+    _setInitialNextDir: function() {
+      nextDir = {};
+      let numPlayers = model.InitialFrame().snakeArray.length;
+      for(i=0; i<numPlayers; i++) {
+        nextDir[i] = '';
+      };
+    },
     // Rendering
     renderFrame(frame) {
       context.fillStyle = bColor;
