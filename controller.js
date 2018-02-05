@@ -1,10 +1,8 @@
+"use strict"
 console.log("controller.js loaded");
-Snake.Controller = function(node) {
+SnakeGame.Controller = function(node) {
   // private
   let view = node;
-  let initialFrame = new Frame(20, 30, 0, [new Snake(0, [[7,7],[7,8],[7,9]], 'up', 0)], [new Fruit([[5,5]], 1, 10000)], false);
-  let currentFrame = initialFrame;
-  let frames = [initialFrame];
   let canvas = $('.snakeCanvas')[0];
   let context = canvas.getContext('2d');
   let pHeight = 10;

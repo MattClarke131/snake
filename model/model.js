@@ -1,12 +1,12 @@
 "use strict"
 console.log("model.js successfully loaded");
 
-let Snake = {}
-Snake.Model = function() {
+let SnakeGame = {}
+SnakeGame.Model = function() {
   // Public
-  let initFrame = new Frame();
+  let initFrame = new Frame(20, 20, 0, [new Snake(0, [[7,7],[7,8],[7,9]], 'up', 0)], [new Fruit([[5,5]], 1, 10000)], false)
   let currentFrame = initFrame;
-  let frames = [];
+  let frames = [initFrame];
   // Private
   return {
     // Get Methods
@@ -22,7 +22,17 @@ Snake.Model = function() {
     },
     setCurrentFrame: function(frame) {
       currentFrame = frame;
-    }
+    },
+    // Game state
+    resetGame: function() {
+      currentFrame = initFrame;
+      frames = [initFrame];
+    },
+    tickGame: function(dirArr) {
+      let next = nextFrame(currentFrame, dirArr);
+      frames.push(next);
+      currentFrame = next;
+    },
     // Debug
     printFrame: function(frame) {
       let grid = this._frameToGrid(frame);
@@ -30,7 +40,7 @@ Snake.Model = function() {
       for (let y=0; y<grid.length; y++) {
         console.log(grid[y]);
       }
-    }
+    },
     _frameToGrid: function(frame) {
       let emptyGrid = [];
       for (let x=0; x<=frame.xMax; x++) {
@@ -58,7 +68,7 @@ Snake.Model = function() {
         emptyGrid[fx][fy] = '@';
       }
       return emptyGrid
-    }
+    },
     _flipGrid: function(grid) {
       var flippedGrid = []
       for(var y=0; y<grid[0].length; y++) {
@@ -68,6 +78,6 @@ Snake.Model = function() {
         }
       }
       return flippedGrid;
-    }
+    },
   }
 };
