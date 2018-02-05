@@ -21,6 +21,7 @@ SnakeGame.Controller = function(node) {
       this.model.resetGame();
       this.renderFrame(this.model.getCurrentFrame());
       this._setModelCallBack();
+      this.setKeys();
     },
     _setModelCallBack: function() {
       let controller = this;
@@ -66,6 +67,39 @@ SnakeGame.Controller = function(node) {
     _renderPixel(x, y, color) {
       context.fillStyle = color;
       context.fillRect(x*pWidth, y*pHeight, pWidth, pHeight);
+    },
+    // Key Binding
+    setKeys() {
+      let controller = this;
+      $(document).unbind();
+      $(document).keydown(function(e) {
+        switch(e.which) {
+          case 87:
+            controller.setNextDir(0, 'up');
+            break;
+          case 65:
+            controller.setNextDir(0, 'left');
+            break;
+          case 83:
+            controller.setNextDir(0, 'down');
+            break;
+          case 68:
+            controller.setNextDir(0, 'right');
+            break;
+          case 38:
+            controller.setNextDir(1, 'up');
+            break;
+          case 37:
+            controller.setNextDir(1, 'left');
+            break;
+          case 40:
+            controller.setNextDir(1, 'down');
+            break;
+          case 39:
+            controller.setNextDir(1, 'right');
+            break;
+        }
+      });
     },
     // Game State
     setNextDir: function(snakeID, dir) {
