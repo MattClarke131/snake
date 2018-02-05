@@ -45,7 +45,7 @@ SnakeGame.Controller = function(node) {
     // Rendering
     renderFrame(frame) {
       context.fillStyle = bColor;
-      context.fillRect(0, 0, pWidth*frame.xMax, pHeight*frame.yMax);
+      context.fillRect(0, 0, pWidth*(1+frame.xMax), pHeight*(1+frame.yMax));
       this._renderSnakes(frame);
       this._renderFruits(frame);
     },
