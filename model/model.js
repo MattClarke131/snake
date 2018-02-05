@@ -7,6 +7,7 @@ SnakeGame.Model = function() {
   let initFrame = new Frame(20, 20, 0, [new Snake(0, [[7,7],[7,8],[7,9]], 'up', 0)], [new Fruit([[5,5]], 1, 10000)], false)
   let currentFrame = initFrame;
   let frames = [initFrame];
+  let scores = [0,0];
   let contCallback = function(){};
   // Private
   return {
@@ -16,6 +17,9 @@ SnakeGame.Model = function() {
     },
     getCurrentFrame: function() {
       return currentFrame;
+    },
+    getScores: function() {
+      return scores;
     },
     // Set Methods
     saveFrame: function(frame) {
@@ -33,11 +37,18 @@ SnakeGame.Model = function() {
       frames = [initFrame];
       contCallback();
     },
-    tickGame: function(dirArr) {
-      let next = nextFrame(currentFrame, dirArr);
+    tickGame: function(dirDict) {
+      let next = nextFrame(currentFrame, dirDict);
       frames.push(next);
       currentFrame = next;
+      this.updateScores();
       contCallback();
+    },
+    updateScores: function() {
+      for (let i=0; i<currentFrame.snakeArray.length; i++) {
+        let snake = currentFrame.snakeArray[i]
+        scores[i] = snake.positionArray.length + snake.remainingGrowth;
+      }
     },
     // Debug
     printFrame: function(frame) {

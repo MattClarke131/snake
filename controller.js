@@ -33,6 +33,7 @@ SnakeGame.Controller = function(node) {
       let controller = this;
       this.model.setContCallback (function() {
         controller.renderFrame(controller.model.getCurrentFrame());
+        controller.updateScore();
       });
     },
     _setInitialNextDir: function() {
@@ -76,6 +77,11 @@ SnakeGame.Controller = function(node) {
       context.fillStyle = color;
       context.fillRect(x*pWidth, y*pHeight, pWidth, pHeight);
     },
+    updateScore() {
+      let scores = this.model.getScores();
+      $('.snake1Score-a').html(scores[0]);
+      $('.snake2Score-a').html(scores[1]);
+    },
     // Key Binding
     setKeys() {
       let controller = this;
@@ -117,7 +123,14 @@ SnakeGame.Controller = function(node) {
       this.model.tickGame(nextDir);
     },
     lose: function() {
-      alert('you lose');
+      let scores = this.model.getScores;
+      if(scores[0] > scores[1]) {
+        alert('PLAYER 1 WINS');
+      } else if (scores[1] > scores[0]) {
+        alert('PLAYER 2 WINS');
+      } else {
+        alert('DRAW');
+      }
     },
     // Timer
     startTimer: function() {
