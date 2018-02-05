@@ -131,3 +131,9 @@ SnakeGame.Controller = function(node) {
     printNextDir: function() {
       console.log(nextDir);
     },
+  }
+};
+
+// temp for debugging
+var controller = SnakeGame.Controller($(".snakeGame")[0]);
+controller.initialize();
