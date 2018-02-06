@@ -47,7 +47,8 @@ SnakeGame.Model = function() {
     updateScores: function() {
       for (let i=0; i<currentFrame.snakeArray.length; i++) {
         let snake = currentFrame.snakeArray[i]
-        scores[i] = snake.positionArray.length + snake.remainingGrowth;
+        let index = snake.id;
+        scores[index] = snake.positionArray.length + snake.remainingGrowth;
       }
     },
     // Debug

@@ -127,7 +127,7 @@ SnakeGame.Controller = function(node) {
       this.model.tickGame(nextDir);
     },
     lose: function() {
-      let scores = this.model.getScores;
+      let scores = this.model.getScores();
       if(scores[0] > scores[1]) {
         alert('PLAYER 1 WINS');
       } else if (scores[1] > scores[0]) {
