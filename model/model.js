@@ -48,6 +48,7 @@ SnakeGame.Model = function() {
       }
       currentFrame = initFrame;
       frames = [initFrame];
+      scores = [0,0];
       contCallback();
     },
     tickGame: function(dirDict) {
