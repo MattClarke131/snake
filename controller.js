@@ -28,12 +28,9 @@ SnakeGame.Controller = function(node) {
     },
     // initialize
     initialize: function() {
-      clearTimeout(timer);
-      this.model.resetGame();
-      this.renderFrame(this.model.getCurrentFrame());
       this._setModelCallBack();
       this.setKeys();
-      this.startTimer();
+      this.newGame(numPlayers);
     },
     _setModelCallBack: function() {
       let controller = this;
@@ -125,6 +122,12 @@ SnakeGame.Controller = function(node) {
       });
     },
     // Game State
+    newGame() {
+      clearTimeout(timer);
+      this.model.resetGame(players);
+      this.renderFrame(this.model.getCurrentFrame());
+      this.startTimer();
+    },
     setNextDir: function(snakeID, dir) {
       nextDir[snakeID] = dir;
     },
