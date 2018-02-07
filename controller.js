@@ -14,8 +14,13 @@ SnakeGame.Controller = function(node) {
   let nextDir = {0: undefined, 1: undefined};
   let tickLength = 500;
   let timer = null;
+  let players = 1;
   // public
   return {
+    // Set Methods
+    setNumPlayers(num) {
+      players = num;
+    },
     // Model
     model: SnakeGame.Model(),
     getGameOver: function() {
@@ -128,12 +133,16 @@ SnakeGame.Controller = function(node) {
     },
     lose: function() {
       let scores = this.model.getScores();
-      if(scores[0] > scores[1]) {
-        alert('PLAYER 1 WINS');
-      } else if (scores[1] > scores[0]) {
-        alert('PLAYER 2 WINS');
-      } else {
-        alert('DRAW');
+      if (players == 1) {
+        alert("YOU GET NOTHING! YOU LOSE! GOOD DAY SIR!")
+      } else if (players == 2) {
+        if(scores[0] > scores[1]) {
+          alert('PLAYER 1 WINS');
+        } else if (scores[1] > scores[0]) {
+          alert('PLAYER 2 WINS');
+        } else {
+          alert('DRAW');
+        }
       }
     },
     // Timer
