@@ -3,7 +3,7 @@ console.log("controller.js loaded");
 SnakeGame.Controller = function(node) {
   // private
   let view = node;
-  let canvas = $('.snakeCanvas')[0];
+  let canvas = $('.snakeCanvas', node)[0];
   let context = canvas.getContext('2d');
   let pHeight = 10;
   let pWidth = 10;
