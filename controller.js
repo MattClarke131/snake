@@ -30,6 +30,7 @@ SnakeGame.Controller = function(node) {
     initialize: function() {
       this._setModelCallBack();
       this.setKeys();
+      this.bindButtons();
       this.newGame(numPlayers);
     },
     _setModelCallBack: function() {
@@ -120,6 +121,12 @@ SnakeGame.Controller = function(node) {
             break;
         }
       });
+    },
+    // Button Binding
+    bindButtons: function() {
+      let controller = this;
+      $($('.start1p', node)[0]).click(function(){controller.setNumPlayers(1); controller.newGame(1)});
+      $($('.start2p', node)[0]).click(function(){controller.setNumPlayers(2); controller.newGame(2)});
     },
     // Game State
     newGame() {
