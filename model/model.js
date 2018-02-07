@@ -4,7 +4,9 @@ console.log("model.js successfully loaded");
 let SnakeGame = {}
 SnakeGame.Model = function() {
   // Public
-  let initFrame = new Frame(20, 20, 0, [new Snake(0, [[7,7],[7,8],[7,9]], 'up', 0)], [new Fruit([[5,5]], 1, 10000)], false)
+  let initFrame1p = new Frame(40, 40, 0, [new Snake(0, [[20,30],[20,31], [20,32]], 'up', 0)], [], false)
+  let initFrame2p = new Frame(40, 40, 0, [new Snake(0, [[10,30],[10,31],[10,32]], 'up', 0), new Snake(1, [[30,30],[30,31],[30,32]], 'up', 0)], [], false)
+  let initFrame = initFrame1p;
   let currentFrame = initFrame;
   let frames = [initFrame];
   let scores = [0,0];
@@ -32,7 +34,18 @@ SnakeGame.Model = function() {
       contCallback = func;
     },
     // Game state
-    resetGame: function() {
+    resetGame: function(numPlayers) {
+      switch(numPlayers) {
+        case 1:
+          initFrame = initFrame1p;
+          break;
+        case 2:
+          initFrame = initFrame2p;
+          break;
+        default:
+          throw new Error('model resetGame(): Wrong numPlayers');
+          break;
+      }
       currentFrame = initFrame;
       frames = [initFrame];
       contCallback();
