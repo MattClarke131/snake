@@ -125,8 +125,11 @@ SnakeGame.Controller = function(node) {
     // Button Binding
     bindButtons: function() {
       let controller = this;
-      $($('.start1p', node)[0]).click(function(){controller.setNumPlayers(1); controller.newGame(1)});
-      $($('.start2p', node)[0]).click(function(){controller.setNumPlayers(2); controller.newGame(2)});
+      $('.start', node).click(function(){
+        const numPlayers = Number($(this).data("numplayers"));
+        controller.setNumPlayers(numPlayers);
+        controller.newGame(numPlayers);
+      });
     },
     // Game State
     newGame() {
