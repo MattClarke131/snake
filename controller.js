@@ -12,7 +12,7 @@ SnakeGame.Controller = function(node) {
   let sBColor = '#5F5';
   let fColor = '#D00';
   let nextDir = {0: undefined, 1: undefined};
-  let tickLength = 500;
+  let tickLength = 100;
   let timer = null;
   let players = 1;
   // public
