@@ -83,8 +83,8 @@ SnakeGame.Controller = function(node) {
     },
     updateScore() {
       let scores = this.model.getScores();
-      $('.snake1Score-a').html(scores[0]);
-      $('.snake2Score-a').html(scores[1]);
+      $('.snake1Score span').html(scores[0]);
+      $('.snake2Score span').html(scores[1]);
     },
     // Key Binding
     setKeys() {
