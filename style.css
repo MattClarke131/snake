@@ -1,0 +1,9 @@
+.snakeGame {
+    text-align: center;
+}
+
+.snakeCanvas {
+    display: block;
+    margin: auto;
+    border: 5px solid #000;
+}
