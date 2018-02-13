@@ -1,0 +1,29 @@
+"Single source of truth"
+  Define a value in one place
+
+Model is controller agnostic
+
+'getValue' should be 'isValue' for booleans
+
+Model can provide the frame in a callback
+  Callbacks are functions; they take parameters, they return values
+
+debugger;
+  keyword to set a breakpoint in the very code itself
+
+
+Variable names
+  Don't use 1 letter variable names
+  Be descriptive/precise
+
+dispatch table
+  A data structure
+  Check it out
+  Better than long chain of if statements or switch table
+
+gameEntity not really productive, since controller treats snakes and fruits separately
+
+MattsValidator("[number, number]", positionArray)
+  Try using something like this for data validation, rather than writing out every test for data type
+
+check out exceptions

@@ -31,7 +31,7 @@ SnakeGame.Controller = function(node) {
       this._setModelCallBack();
       this.setKeys();
       this.bindButtons();
-      this.newGame(numPlayers);
+      this.newGame(players);
     },
     _setModelCallBack: function() {
       let controller = this;
@@ -89,36 +89,30 @@ SnakeGame.Controller = function(node) {
     // Key Binding
     setKeys() {
       let controller = this;
+      const keyDispatch = {
+        87: [0, 'up'],
+        65: [0, 'left'],
+        83: [0, 'down'],
+        68: [0, 'right'],
+        38: [1, 'up'],
+        37: [1, 'left'],
+        40: [1, 'down'],
+        39: [1, 'right'],
+        13: function() { controller.initialize() }
+      };
       $(document).unbind();
       $(document).keydown(function(e) {
-        switch(e.which) {
-          case 87:
-            controller.setNextDir(0, 'up');
-            break;
-          case 65:
-            controller.setNextDir(0, 'left');
-            break;
-          case 83:
-            controller.setNextDir(0, 'down');
-            break;
-          case 68:
-            controller.setNextDir(0, 'right');
-            break;
-          case 38:
-            controller.setNextDir(1, 'up');
-            break;
-          case 37:
-            controller.setNextDir(1, 'left');
-            break;
-          case 40:
-            controller.setNextDir(1, 'down');
-            break;
-          case 39:
-            controller.setNextDir(1, 'right');
-            break;
-          case 13:
-            controller.initialize();
-            break;
+        const keyCode = e.which;
+        const behavior = keyDispatch[keyCode];
+        if (Array.isArray(behavior)) {
+          const [ snakeCode, direction ] = behavior;
+          controller.setNextDir(snakeCode, direction);
+        }
+        else if (typeof behavior == 'function') {
+          behavior();
+        }
+        else {
+          console.error("Controller keybinding")
         }
       });
     },
